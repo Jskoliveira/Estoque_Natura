@@ -22,35 +22,62 @@ const corsOptions = {
     if (AllowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
-      callback(new Error("A origem não é um cors permitido!"));
+      callback(new Error("A origem não é um dos cors permitidos!"));
     }
   }
 }
 
 app.options('*', cors(corsOptions));
 
-app.get("/:id", cors(corsOptions), async (req, res) => {
-  const product = await db.SelectProduct(req.params.id);
+// app.get("/:id", cors(corsOptions), async (req, res) => {
+//   const product = await db.SelectProduct(req.params.id);
+//   res.json(product)
+// })
+
+// app.get("/", cors(corsOptions), async (_, res) => {
+//   const product = await db.SelectProducts();
+//   res.json(product)
+// })
+
+// app.post("/", cors(corsOptions), async (req, res) => {
+//   await db.InsertProduct(req.body);
+//   res.sendStatus(201);
+// })
+
+// app.patch("/:codigo", cors(corsOptions), async (req, res) => {
+//   await db.UpDateProduct(req.params.codigo, req.body);
+//   res.sendStatus(200);
+// })
+
+// app.delete("/:codigo", cors(corsOptions), async (req, res) => {
+//   await db.DeleteProduct(req.params.codigo);
+//   res.sendStatus(204);
+// })
+
+//*********************************************************
+
+app.get("/:codigo", cors(corsOptions), async (req, res) => {
+  const product = await db.SelectProductEstoque(req.params.codigo);
   res.json(product)
 })
 
 app.get("/", cors(corsOptions), async (_, res) => {
-  const product = await db.SelectProducts();
+  const product = await db.SelectProductsEstoque();
   res.json(product)
 })
 
 app.post("/", cors(corsOptions), async (req, res) => {
-  await db.InsertProduct(req.body);
+  await db.InsertProductEstoque(req.body);
   res.sendStatus(201);
 })
 
 app.patch("/:codigo", cors(corsOptions), async (req, res) => {
-  await db.UpDateProduct(req.params.codigo, req.body);
+  await db.UpDateProductEstoque(req.params.codigo, req.body);
   res.sendStatus(200);
 })
 
 app.delete("/:codigo", cors(corsOptions), async (req, res) => {
-  await db.DeleteProduct(req.params.codigo);
+  await db.DeleteProductEstoque(req.params.codigo);
   res.sendStatus(204);
 })
 

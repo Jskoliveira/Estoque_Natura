@@ -28,7 +28,7 @@ export const Th = styled.th`
   color: #FF8C00;
 
   @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
+    ${(props) => props && "display: none"}
   }
 `;
 
@@ -38,7 +38,7 @@ export const Td = styled.td`
   width: ${(props) => (props.width ? props.width : "auto")};  
 
   @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none"}
+    ${(props) => props && "display: none"}
   }
 `;
 
@@ -58,7 +58,6 @@ const Grid = ({ products, setOnEdit, setProducts }) => {
         toast.success(data);
       })
       .catch(({ data }) => toast.error(data));
-
     setOnEdit(null);
   };
 
@@ -66,9 +65,10 @@ const Grid = ({ products, setOnEdit, setProducts }) => {
     <Table>
       <Thead>
         <Tr>
+          <Th>Código</Th>
           <Th>Produto</Th>
-          <Th onlyWeb>Valor</Th>
-          <Th onlyWeb>Código</Th>
+          <Th>Valor</Th>
+          <Th>Quantidade</Th>
           <Th></Th>
           <Th></Th>
         </Tr>
@@ -76,9 +76,10 @@ const Grid = ({ products, setOnEdit, setProducts }) => {
       <Tbody>
         {products.map((item, i) => (
           <Tr Key={i}>
+            <Td width="20%" onlyWeb>{item.codigo}</Td>
             <Td width="40%">{item.produto}</Td>
             <Td width="20%" onlyWeb>{item.valor}</Td>
-            <Td width="20%" onlyWeb>{item.codigo}</Td>
+            <Td width="20%" onlyWeb>{item.quantidade}</Td>
             <Td alignCenter width="5%">
               <FaTrash className="Icon" onClick={() => handleDelete(item.codigo)} />
             </Td>

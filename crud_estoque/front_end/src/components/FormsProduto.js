@@ -83,7 +83,7 @@ const Form = ({ getProducts, onEdit, setOnEdit }) => {
           valor: product.valor.value,
           codigo: product.codigo.value,
         })
-        .then(({ data }) => toast.success(data))
+        .then(toast.success())
         .catch(({ data }) => toast.error(data));
     }
 
@@ -91,8 +91,9 @@ const Form = ({ getProducts, onEdit, setOnEdit }) => {
     product.valor.value = "";
     product.codigo.value = "";
 
-    setOnEdit(null);
+    setOnEdit(null);    
     getProducts();
+    
   };
 
   return (
@@ -115,7 +116,3 @@ const Form = ({ getProducts, onEdit, setOnEdit }) => {
 };
 
 export default Form;
-
-
-
-
