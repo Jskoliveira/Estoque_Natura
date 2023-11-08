@@ -52,11 +52,11 @@ const Button = styled.button`
 
 const Form = ({ getProductsEstoque, onEdit, setOnEdit }) => {
 
-  const ref = useRef();  
+  const ref = useRef();
   const product = ref.current
 
-  const onBlur = async () => {    
-    const codigo = product.codigo.value    
+  const onBlur = async () => {
+    const codigo = product.codigo.value
     const res = await axios.get("http://localhost:8800/" + codigo)
     try {
       product.produto.value = res.data[0].produto
@@ -67,11 +67,11 @@ const Form = ({ getProductsEstoque, onEdit, setOnEdit }) => {
       toast.error(error);
     }
   };
-  
-  
+
+
   useEffect(() => {
-    if (onEdit) {      
-      const product = ref.current;      
+    if (onEdit) {
+      const product = ref.current;
 
       product.codigo.value = onEdit.codigo;
       product.produto.value = onEdit.produto;
@@ -82,7 +82,7 @@ const Form = ({ getProductsEstoque, onEdit, setOnEdit }) => {
 
 
   const handlePesquisar = async (e) => {
-    e.preventDefault();   
+    e.preventDefault();
 
     if (!product.codigo.value) {
       return toast.warn("Informe o código para prosseguir!");
@@ -103,7 +103,7 @@ const Form = ({ getProductsEstoque, onEdit, setOnEdit }) => {
           quantidade: product.quantidade.value
 
         })
-        .then(({ data }) => toast.success(data))
+        .then(() => toast.success("Produto Cadastrado com Sucesso"))
         .catch(({ data }) => toast.error(data));
     }
     product.produto.value = "";

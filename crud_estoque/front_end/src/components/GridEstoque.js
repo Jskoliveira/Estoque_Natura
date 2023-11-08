@@ -55,7 +55,7 @@ const Grid = ({ products, setOnEdit, setProducts }) => {
         const newArray = products.filter((product) => product.codigo !== codigo);
 
         setProducts(newArray);
-        toast.success(data);
+        toast.success("Produto excluído com sucesso");
       })
       .catch(({ data }) => toast.error(data));
     setOnEdit(null);
